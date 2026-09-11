@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BlazePlus — Aman Bhatt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --bg: #12151b;
+    --panel: #1a1f28;
+    --panel-border: #262d39;
+    --text: #e8ebf0;
+    --text-muted: #8d95a3;
+    --ember: #f2622d;
+    --ember-soft: rgba(242, 98, 45, 0.14);
+    --teal: #3fc1c0;
+    --teal-soft: rgba(63, 193, 192, 0.14);
+    --radius: 14px;
+    --maxw: 760px;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .mark{
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---- top bar ---- */
+
+  .topbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 0;
+  }
+
+  .topbar .wrap{
+    max-width: 920px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .mark{
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .mark span{ color: var(--ember); }
+
+  .by-line{
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .by-line:hover{
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  /* ---- hero ---- */
+
+  .hero{
+    padding: 48px 0 24px;
+  }
+
+  .status-row{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+
+  .pill{
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--panel-border);
+    color: var(--text-muted);
+  }
+
+  h1.title{
+    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    line-height: 1.08;
+    margin: 0 0 14px;
+    color: var(--ember);
+    font-weight: 700;
+  }
+
+  .tagline{
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 56ch;
+    margin: 0 0 36px;
+  }
+
+  /* ---- badge card: the one bold element ---- */
+
+  .badge-card{
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 28px 28px 24px;
+    overflow: hidden;
+    animation: badge-in 0.5s ease-out;
+  }
+
+  @keyframes badge-in{
+    from{ opacity: 0; transform: translateY(8px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .badge-card{ animation: none; }
+  }
+
+  .badge-card::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, var(--ember), var(--teal));
+  }
+
+  .badge-top{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .badge-avatar{
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: var(--ember-soft);
+    color: var(--ember);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+
+  .badge-name{
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  .badge-role{
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .badge-status{
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--teal);
+  }
+
+  .dot{
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+
+  .badge-divider{
+    border-top: 1px dashed var(--panel-border);
+    margin: 16px 0;
+  }
+
+  .badge-tags{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tag{
+    font-size: 0.76rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--teal-soft);
+    color: var(--teal);
+  }
+
+  /* ---- sections ---- */
+
+  section{
+    padding: 44px 0;
+    border-top: 1px solid var(--panel-border);
+  }
+
+  h2.section-title{
+    font-size: 1.4rem;
+    margin: 0 0 20px;
+    font-weight: 600;
+  }
+
+  .lede p{
+    color: var(--text-muted);
+    max-width: 68ch;
+  }
+
+  .lede p + p{
+    margin-top: 14px;
+  }
+
+  /* ---- features ---- */
+
+  .feature-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .feature{
+    background: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 20px 20px 22px;
+  }
+
+  .feature h3{
+    font-size: 1rem;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .feature p{
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .steps{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 0.8rem;
+    color: var(--ember);
+  }
+
+  .steps span{ opacity: 0.4; }
+
+  /* ---- screenshots ---- */
+
+  .ss-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  figure{
+    margin: 0;
+  }
+
+  figure img{
+    width: 100%;
+    display: block;
+    border-radius: 10px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    aspect-ratio: 16/10;
+    object-fit: cover;
+  }
+
+  figcaption{
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+  }
+
+  /* ---- video ---- */
+
+  .video-frame{
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  video{
+    width: 100%;
+    display: block;
+  }
+
+  /* ---- cta ---- */
+
+  .cta{
+    text-align: left;
+    padding: 56px 0 70px;
+  }
+
+  .cta p{
+    color: var(--text-muted);
+    margin: 0 0 20px;
+  }
+
+  .cta .note{
+    font-size: 0.85rem;
+    margin: 14px 0 0;
+    max-width: 46ch;
+  }
+
+  .btn{
+    display: inline-block;
+    background: var(--ember);
+    color: #14171d;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 13px 26px;
+    border-radius: 10px;
+    transition: filter 0.15s ease;
+  }
+
+  .btn:hover{ filter: brightness(1.08); }
+
+  .btn:focus-visible,
+  a:focus-visible,
+  .by-line:focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 640px){
+    .feature-grid, .ss-grid{
+      grid-template-columns: 1fr;
+    }
+    .badge-status{
+      margin-left: 0;
+    }
+    .badge-top{
+      flex-wrap: wrap;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="mark" href="../index.html">AB<span>.</span></a>
+    <a class="by-line" href="../index.html">Created by Aman Bhatt</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <section class="hero" style="border-top:none; padding-top:8px;">
+    <div class="status-row">
+      <span class="pill">Completed</span>
+      <span class="pill">Solo project</span>
+      <span class="pill">Internal tool</span>
+    </div>
+
+    <h1 class="title">BlazePlus</h1>
+    <p class="tagline">An internal directory and chat tool, built for a company that had outgrown spreadsheets and group texts.</p>
+
+    <div class="badge-card">
+      <div class="badge-top">
+        <div class="badge-avatar">BP</div>
+        <div>
+          <div class="badge-name">BlazePlus</div>
+          <div class="badge-role">Employee directory &amp; comms</div>
+        </div>
+        <div class="badge-status"><span class="dot"></span>Active</div>
+      </div>
+      <div class="badge-divider"></div>
+      <div class="badge-tags">
+        <span class="tag">PHP</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Vanilla JS</span>
+        <span class="tag">AJAX</span>
+        <span class="tag">Role-based Auth</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">About the project</h2>
+    <div class="lede">
+      <p>BlazePlus started with a simple question: how does a growing team keep track of who's who, without yet another spreadsheet floating around? I built it from the ground up in raw PHP and MySQL, handling everything from the sign-up flow to the admin tools that keep the whole directory in order.</p>
+      <p>It's not just a database with a login screen, though. The part I spent the most time on was the stuff in between — getting someone into the platform safely, letting them talk to their team without friction, and giving admins a way to keep things running without babysitting every action. I documented the build daily on LinkedIn as it came together.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">What it does</h2>
+    <div class="feature-grid">
+
+      <div class="feature">
+        <h3>Getting people in the door</h3>
+        <p>New hires don't just type in an email and get access. They verify their account, then an admin gives the final sign-off before anything opens up.</p>
+        <div class="steps">Sign up<span>→</span>Verify<span>→</span>Admin review<span>→</span>Access</div>
+      </div>
+
+      <div class="feature">
+        <h3>Not everyone needs to see everything</h3>
+        <p>What you can view depends on your role. A team member sees their own department; an admin sees the full picture. Nobody's digging through information that isn't theirs to see.</p>
+      </div>
+
+      <div class="feature">
+        <h3>A place to actually talk</h3>
+        <p>Each department gets its own live chat room, updating in real time through AJAX polling, with support for sharing images and PDFs — no refreshing, no waiting around.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Moving desks without the paperwork</h3>
+        <p>Changing departments doesn't mean emailing IT and hoping someone gets to it. People can request the move themselves, right from their profile.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Reaching out without oversharing</h3>
+        <p>Contact details aren't just public to everyone. People send a request first — a small buffer that keeps things respectful across roles.</p>
+      </div>
+
+      <div class="feature">
+        <h3>Keeping the place tidy</h3>
+        <p>Admins work from a dashboard with three separate review queues and moderation tools, so nothing odd slips through unnoticed.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">A quick look</h2>
+    <div class="ss-grid">
+      <figure>
+        <img src="images/ss/s1.png" alt="BlazePlus employee directory screenshot">
+        <figcaption>The directory</figcaption>
+      </figure>
+      <figure>
+        <img src="images/ss/s2.png" alt="BlazePlus live chat screenshot">
+        <figcaption>Live department chat</figcaption>
+      </figure>
+      <figure>
+        <img src="images/ss/s3.png" alt="BlazePlus admin review queue screenshot">
+        <figcaption>Admin review queue</figcaption>
+      </figure>
+      <figure>
+        <img src="images/ss/s4.png" alt="BlazePlus department transfer screenshot">
+        <figcaption>Department transfer request</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-title">See it in motion</h2>
+    <div class="video-frame">
+      <video controls preload="metadata" poster="images/ss/s1.png">
+        <source src="videos/walkthrough.mp4" type="video/mp4">
+        Your browser doesn't support embedded video. You can download the walkthrough instead.
+      </video>
+    </div>
+  </section>
+
+  <section class="cta">
+    <p>Want to poke around yourself?</p>
+    <a class="btn" href="https://blaze-plus-demo.vercel.app" target="_blank" rel="noopener">Try it yourself</a>
+    <p class="note">This is a static demo — everything runs in plain HTML/JS, no backend behind it. Refresh and your chat messages, requests, and changes reset, but you can click through the whole flow and see how it's built.</p>
+  </section>
+
+</div>
+
+</body>
+</html>
