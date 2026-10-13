@@ -503,5 +503,16 @@
 
 </div>
 
+<script>
+  // Start the walkthrough video at 2x speed (viewers can still change it)
+  (function() {
+    const v = document.querySelector('video');
+    if (!v) return;
+    v.defaultPlaybackRate = 2;
+    v.playbackRate = 2;
+    v.addEventListener('loadedmetadata', () => { v.playbackRate = 2; });
+  })();
+</script>
+
 </body>
 </html>
